@@ -1,0 +1,128 @@
+plc_rack=0
+plc_slot=0
+plc_ip="x.x.x.x"
+datatypes={"real":4}
+sample_time=10
+mydb = mysql.connector.connect( 
+  host = "x.x.x.x", 
+  user = "???????", 
+  password = "******",
+  #name of the database
+  database = "-----",
+  use_pure= True
+)
+# mysql table name
+table="---"
+
+dbs={
+    25:{
+        76:{
+            "name":"machine_speed",
+            "type":"real",
+            "storing_data_type":"integer",
+            "default":"0",
+            "precision":0,
+            "upper_tolarence":10,
+            "lower_tolarence":10,
+            "current_value":0.0,
+            "condition_to_log_value":0,
+            "condition_to_log":0,
+            "condition_to_log_compare":0,
+            "function_on_changing":"empty_func"
+            }
+    
+        },
+    53:{
+        98:{
+            "name":"inner_tension",
+            "type":"real",
+            "storing_data_type":"integer",
+            "default":"0",
+            "precision":-1,
+            "upper_tolarence":20,
+            "lower_tolarence":20,
+            "current_value":0.0,
+            "condition_to_log_value":[25,76],
+            "condition_to_log":">",
+            "condition_to_log_compare":0,
+            "function_on_changing":"empty_func"
+            
+            },
+        102:{
+            "name":"outer_tension",
+            "type":"real",
+            "storing_data_type":"integer",
+            "default":"0",
+            "precision":-1,
+            "upper_tolarence":20,
+            "lower_tolarence":20,
+            "current_value":0.0,
+            "condition_to_log_value":[25,76],
+            "condition_to_log":">",
+            "condition_to_log_compare":0,
+            "function_on_changing":"empty_func"
+            }
+    
+        },
+    400:{
+        20:{
+            "name":"inner_length_setpoint",
+            "type":"real",
+            "storing_data_type":"integer",
+            "default":"0",
+            "precision":-1,
+            "upper_tolarence":10,
+            "lower_tolarence":10,
+            "current_value":0.0,
+            "condition_to_log_value":[25,76],
+            "condition_to_log":">",
+            "condition_to_log_compare":0,
+            "function_on_changing":"empty_func"
+            },
+        24:{
+            "name":"outer_length_setpoint",
+            "type":"real",
+            "storing_data_type":"integer",
+            "default":"0",
+            "precision":-1,
+            "upper_tolarence":10,
+            "lower_tolarence":10,
+            "current_value":0.0,
+            "condition_to_log_value":[25,76],
+            "condition_to_log":">",
+            "condition_to_log_compare":0,
+            "function_on_changing":"empty_func"
+            }
+        },
+    14:{
+        12:{
+            "name":"actual_inner_length",
+            "type":"real",
+            "storing_data_type":"integer",
+            "default":"0",
+            "precision":-1,
+            "upper_tolarence":50,
+            "lower_tolarence":50,
+            "current_value":0.0,
+            "condition_to_log_value":[25,76],
+            "condition_to_log":">",
+            "condition_to_log_compare":0,
+            "function_on_changing":"asc_cycle_id"
+            },
+        20:{
+            "name":"actual_outer_length",
+            "type":"real",
+            "storing_data_type":"integer",
+            "default":"0",
+            "precision":-1,
+            "upper_tolarence":50,
+            "lower_tolarence":50,
+            "current_value":0.0,
+            "condition_to_log_value":[25,76],
+            "condition_to_log":">",
+            "condition_to_log_compare":0,
+            "function_on_changing":"empty_func"
+            }
+        }
+
+}
