@@ -3,6 +3,7 @@ plc_slot=0
 plc_ip="x.x.x.x"
 #Siemens datatypes
 datatypes={"real":4,"int":2,"dint":4}
+#sample time in sec
 sample_time=10
 mydb = mysql.connector.connect( 
   host = "x.x.x.x", 

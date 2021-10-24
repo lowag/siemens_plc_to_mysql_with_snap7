@@ -5,7 +5,6 @@ from snap7.snap7exceptions import Snap7Exception
 client=snap7.client.Client()
 import mysql.connector
 import my_config
-
 cycle_id=0  
 
 cursor = mydb.cursor()
