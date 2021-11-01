@@ -1,8 +1,6 @@
 plc_rack=0
 plc_slot=0
 plc_ip="x.x.x.x"
-#Siemens datatypes
-datatypes={"real":4,"int":2,"dint":4}
 #sample time in sec
 sample_time=10
 mydb = mysql.connector.connect( 
@@ -17,10 +15,10 @@ mydb = mysql.connector.connect(
 table="---"
 
 dbs={
-    25:{
-        76:{
+    25:{#db25
+        76:{#db25.76
             "name":"machine_speed",
-            "type":"real",
+            "type":"db_int"
             "storing_data_type":"integer",
             "default":"0",
             "precision":0,
@@ -33,11 +31,28 @@ dbs={
             "function_on_changing":"empty_func"
             }
     
+        },    
+    0:{#MW244
+        244:{
+            "name":"temp_after_dryer4",
+            "type":"int",
+            "storing_data_type":"integer",
+            "default":"0",
+            "precision":0,
+            "upper_tolarence":5,
+            "lower_tolarence":5,
+            "current_value":0.0,
+            "condition_to_log_value":[237,0],
+            "condition_to_log":">",
+            "condition_to_log_compare":0,
+            "function_on_changing":"empty_func"
+            }
+    
         },
     53:{
         98:{
             "name":"inner_tension",
-            "type":"real",
+            "type":"db_real"
             "storing_data_type":"integer",
             "default":"0",
             "precision":-1,
@@ -52,7 +67,7 @@ dbs={
             },
         102:{
             "name":"outer_tension",
-            "type":"real",
+            "type":"db_real"
             "storing_data_type":"integer",
             "default":"0",
             "precision":-1,
@@ -69,7 +84,7 @@ dbs={
     400:{
         20:{
             "name":"inner_length_setpoint",
-            "type":"real",
+            "type":"db_real"
             "storing_data_type":"integer",
             "default":"0",
             "precision":-1,
@@ -83,7 +98,7 @@ dbs={
             },
         24:{
             "name":"outer_length_setpoint",
-            "type":"real",
+            "type":"db_real"
             "storing_data_type":"integer",
             "default":"0",
             "precision":-1,
@@ -99,7 +114,7 @@ dbs={
     14:{
         12:{
             "name":"actual_inner_length",
-            "type":"real",
+            "type":"db_real"
             "storing_data_type":"integer",
             "default":"0",
             "precision":-1,
@@ -113,7 +128,7 @@ dbs={
             },
         20:{
             "name":"actual_outer_length",
-            "type":"real",
+            "type":"db_real"
             "storing_data_type":"integer",
             "default":"0",
             "precision":-1,
@@ -128,3 +143,10 @@ dbs={
         }
 
 }
+def asc_cycle_id(new_value):
+    global dbs,cycle_id
+    if (new_value==0 and dbs[14][20]["current_value"]>0):
+        cycle_id+=1
+        for db in dbs:
+            for data in dbs[db]:
+                dbs[db][data]["current_value"]=0
